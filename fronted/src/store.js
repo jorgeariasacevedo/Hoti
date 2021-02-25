@@ -5,13 +5,13 @@ import {
   productDetailsReducer,
   productListReducer,
 } from "./reducers/productReducers";
-
+//Esto permite guardar el estado del carrito aun si se actualiza ponendo como estado inicial el carrito
 const initialState = {
-  /*cart: {
+  cart: {
     cartItems: localStorage.getItem("cartItems")
       ? JSON.parse(localStorage.getItem("cartItems"))
       : [],
-  },*/
+  },
 };
 const reducer = combineReducers({
   productList: productListReducer,
