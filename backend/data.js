@@ -60,6 +60,18 @@ const data = {
       numReviews: 10,
       description: "Taslan bomber alta calidad",
     },
+    {
+      _id: "6",
+      name: "Campera camila gris",
+      category: "camperas",
+      image: "/images/p2.jpg",
+      price: 65,
+      countInStock: 12,
+      brand: "camila",
+      rating: 4.5,
+      numReviews: 10,
+      description: "Taslan bomber alta calidad",
+    },
   ],
 };
 
