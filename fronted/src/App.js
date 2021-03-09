@@ -17,7 +17,9 @@ import CartScreen from "./screens/CartScreen";
 import { useDispatch, useSelector } from "react-redux";
 import SigninScreen from "./screens/SigninScreen";
 import ProductEditScreen from "./screens/ProductEditScreen";
-/*3:16:15 Tenemos un error state.cartItems.find is not a function PARTE 40*/
+import OrderListScreen from "./screens/OrderListScreen";
+/*PARTE 41, corrección de git en DELETE*/
+//Estamos en 45
 function App() {
   const cart = useSelector((state) => state.cart);
   const { cartItems } = cart;
@@ -112,6 +114,10 @@ function App() {
           <AdminRoute
             path="/productlist"
             component={ProductListScreen}
+          ></AdminRoute>
+          <AdminRoute
+            path="/orderlist"
+            component={OrderListScreen}
           ></AdminRoute>
           <Route path="/" component={HomeScreen} exact></Route>
         </main>
