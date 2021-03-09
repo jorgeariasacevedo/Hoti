@@ -1,13 +1,23 @@
+import React from "react";
 import { BrowserRouter, Link, Route } from "react-router-dom";
 import { signout } from "./actions/userActions";
+import AdminRoute from "./componentes/AdminRoute";
+import PrivateRoute from "./componentes/PrivateRoute";
 import HomeScreen from "./screens/HomeScreen";
+import OrderHistoryScreen from "./screens/OrderHistoryScreen";
+import OrderScreen from "./screens/OrderScreen";
+import PaymentMethodScreen from "./screens/PaymentMethodScreen";
+import PlaceOrderScreen from "./screens/PlaceOrderScreen";
+import ProductListScreen from "./screens/ProductListScreen";
 import ProductScreen from "./screens/ProductScreen";
+import ProfileScreen from "./screens/ProfileScreen";
 import RegisterScreen from "./screens/RegisterScreen";
-import Product from "./componentes/Product";
+import ShippingAddressScreen from "./screens/ShippingAddressScreen";
 import CartScreen from "./screens/CartScreen";
 import { useDispatch, useSelector } from "react-redux";
 import SigninScreen from "./screens/SigninScreen";
-/*3:16:15 Tenemos un error state.cartItems.find is not a function*/
+import ProductEditScreen from "./screens/ProductEditScreen";
+/*3:16:15 Tenemos un error state.cartItems.find is not a function PARTE 40*/
 function App() {
   const cart = useSelector((state) => state.cart);
   const { cartItems } = cart;
@@ -41,6 +51,12 @@ function App() {
                 </Link>
                 <ul className="dropdown-content">
                   <li>
+                    <Link to="/profile">User Profile</Link>
+                  </li>
+                  <li>
+                    <Link to="/orderhistory">Order History</Link>
+                  </li>
+                  <li>
                     <Link to="#signout" onClick={signoutHandler}>
                       Sign Out
                     </Link>
@@ -50,14 +66,53 @@ function App() {
             ) : (
               <Link to="/signin">Sign In</Link>
             )}
+            {userInfo && userInfo.isAdmin && (
+              <div className="dropdown">
+                <Link to="#admin">
+                  Admin <i className="fa fa-caret-down"></i>
+                </Link>
+                <ul className="dropdown-content">
+                  <li>
+                    <Link to="/dashboard">Dashboard</Link>
+                  </li>
+                  <li>
+                    <Link to="/productlist">Products</Link>
+                  </li>
+                  <li>
+                    <Link to="/orderlist">Orders</Link>
+                  </li>
+                  <li>
+                    <Link to="/userlist">Users</Link>
+                  </li>
+                </ul>
+              </div>
+            )}
           </div>
         </header>
 
         <main>
           <Route path="/cart/:id?" component={CartScreen}></Route>
-          <Route path="/product/:id" component={ProductScreen}></Route>
+          <Route path="/product/:id" component={ProductScreen} exact></Route>
+          <Route
+            path="/product/:id/edit"
+            component={ProductEditScreen}
+            exact
+          ></Route>
           <Route path="/signin" component={SigninScreen}></Route>
           <Route path="/register" component={RegisterScreen}></Route>
+          <Route path="/shipping" component={ShippingAddressScreen}></Route>
+          <Route path="/payment" component={PaymentMethodScreen}></Route>
+          <Route path="/placeorder" component={PlaceOrderScreen}></Route>
+          <Route path="/order/:id" component={OrderScreen}></Route>
+          <Route path="/orderhistory" component={OrderHistoryScreen}></Route>
+          <PrivateRoute
+            path="/profile"
+            component={ProfileScreen}
+          ></PrivateRoute>
+          <AdminRoute
+            path="/productlist"
+            component={ProductListScreen}
+          ></AdminRoute>
           <Route path="/" component={HomeScreen} exact></Route>
         </main>
 
